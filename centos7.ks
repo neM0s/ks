@@ -59,7 +59,7 @@ part raid.11 --asprimary --fstype=raid --size=1 --grow --ondrive=xvdb
 
 raid pv.01 --fstype xfs --device pv.01 --level=RAID1 raid.10 raid.11
 volgroup vg_test pv.01
-#logvol /mnt --vgname=vg_test --fstype xfs --size=100 --grow --name=lv_root
+logvol /mnt --vgname=vg_test --size=100 --grow --name=lv_root
 
 
 #part raid.boota --asprimary --fstype="raid" --size=500 --ondrive=xvda
@@ -168,6 +168,7 @@ echo .
 
 #base changes
 rpm -ivh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-1.noarch.rpm
+yum -y update
 yum install ntp git wget man mc zsh atop htop dstat nmon zsh -y
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 chkconfig ntpd on
