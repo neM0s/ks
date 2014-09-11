@@ -9,8 +9,9 @@ install
 logging --level=warning
 
 # Install from a friendly mirror and add updates
-url --url http://mirror.rackspace.com/CentOS/7.0.1406/os/x86_64/
-repo --name=centos-updates --mirrorlist=http://mirrorlist.centos.org/?release=7.0.1406&arch=x86_64&repo=updates
+#url --url http://mirror.rackspace.com/CentOS/7.0.1406/os/x86_64/
+#repo --name=centos-updates --mirrorlist=http://mirrorlist.centos.org/?release=7.0.1406&arch=x86_64&repo=updates
+repo=cdrom
 
 # Language and keyboard setup
 lang en_US.UTF-8
@@ -33,7 +34,7 @@ timezone --utc Europe/Warsaw
 #rootpw --lock
 # if you want to preset the root password in a public kickstart file, use SHA512crypt e.g.
 #rootpw --iscrypted $6$9dC4m770Q1o$FCOvPxuqc1B22HM21M5WuUfhkiQntzMuAV7MY0qfVcvhwNQ2L86PcnDWfjDd12IFxWtRiTuvO/niB0Q3Xpf2I.
-rootpw --iscrypted $6$WY2iaTOC$SOLpbPABhTv4KjWgP3UlNQLYz5vjRLLef2f9kzfpri1cxCOM8St1OnmlBrfi1BACAfX01Tncl4sybxQqRL9x8/
+rootpw --iscrypted $6$mDCERb4C$Bjz7IelxTkSLxLlejOJf988NrhVPCo4CM6wLpDv75.hmo6kfN0.j2HVpvgp.fYPA5WNsItX.1wOTE69BMZnUW
 #user --name=centos --password=Asdfqwerty --plaintext --gecos="CentOS User" --shell=/bin/bash --groups=user,wheel
 # if you want to preset the user password in a public kickstart file, use SHA512crypt e.g.
 # user --name=centos --password=$6$9dC4m770Q1o$FCOvPxuqc1B22HM21M5WuUfhkiQntzMuAV7MY0qfVcvhwNQ2L86PcnDWfjDd12IFxWtRiTuvO/niB0Q3Xpf2I. --iscrypted --gecos="CentOS User" --shell=/bin/bash --groups=user,wheel
