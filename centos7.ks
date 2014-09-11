@@ -52,10 +52,10 @@ eula --agreed
 zerombr
 clearpart --all
 
-part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvda
-part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvdb
-part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvda
-part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvdb
+part raid.boota --asprimary --fstype="raid" --size=500 --ondrive=xvda
+part raid.bootb --asprimary --fstype="raid" --size=500 --ondrive=xvdb
+part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondrive=xvda
+part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondrive=xvdb
 
 raid /boot --fstype ext3 --device boot --level=RAID1 raid.boota raid.bootb
 raid pv.01 --device pv.01 --level=RAID1 raid.roota raid.rootb
