@@ -51,25 +51,25 @@ eula --agreed
 # Setup the disk
 zerombr
 clearpart --all
-part /boot --fstype=ext3 --size=500 --asprimary --ondisk=xvda
-part / --fstype=xfs --size=6192 --asprimary --ondisk=xvdb
-part raid.10 --asprimary --fstype=raid --size=1 --grow --ondrive=xvda
-part raid.11 --asprimary --fstype=raid --size=1 --grow --ondrive=xvdb
+#part /boot --fstype=ext3 --size=500 --asprimary --ondisk=xvda
+#part / --fstype=xfs --size=6192 --asprimary --ondisk=xvdb
+#part raid.10 --asprimary --fstype=raid --size=1 --grow --ondrive=xvda
+#part raid.11 --asprimary --fstype=raid --size=1 --grow --ondrive=xvdb
 
-raid pv.01 --fstype xfs --device pv.01 --level=RAID1 raid.10 raid.11
-volgroup vg_test pv.01
+#raid pv.01 --fstype xfs --device pv.01 --level=RAID1 raid.10 raid.11
+#volgroup vg_test pv.01
 #logvol /mnt --vgname=vg_test --fstype=xfs --size=100 --grow --name=lv_root
 
-#part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvda
-#part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvdb
-#part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvda
-#part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvdb
+part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvda
+part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvdb
+part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvda
+part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvdb
 
-#raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
-#raid pv.01 --device=md1 --level=RAID1 raid.roota raid.rootb
+raid /boot --fstype ext3 --device md0 --level=RAID1 raid.boota raid.bootb
+raid pv.01 --fstype xfs --device pv.01 --level=RAID1 raid.roota raid.rootb
 
-#volgroup vg_root pv.01
-#logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --percent=100 --name=lv_root
+volgroup vg_root pv.01
+logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --percent=100 --name=lv_root
 #logvol swap --vgname=vg_root --size 1024 --name=lv_swap
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
