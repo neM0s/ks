@@ -58,7 +58,7 @@ part raid.testb --asprimary --fstype=raid --size=1 --grow --ondisk=xvdb
 
 raid pv.01 --device=md0 --level=RAID1 raid.testa raid.testb
 volgroup vg_test pv.01
-logvol /mnt --vgname=vg_test --fstype=xfs --size=100 --grow --name=lv_root
+#logvol /mnt --vgname=vg_test --fstype=xfs --size=100 --grow --name=lv_root
 
 #part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=xvda
 #part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=xvdb
