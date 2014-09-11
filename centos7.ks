@@ -51,7 +51,7 @@ eula --agreed
 # Setup the disk
 clearpart --all --initlabel
 part /boot --fstype=ext3 --size=500 --asprimary ondisk=xvda
-part / --fstype=xfs --size=6192 --asprimary on disk=xvdb
+part / --fstype=xfs --size=6192 --asprimary ondisk=xvdb
 part raid.testa --asprimary --fstype=raid --size=1 --grow --ondisk=xvda
 part raid.testb --asprimary --fstype=raid --size=1 --grow --ondisk=xvdb
 
