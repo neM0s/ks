@@ -174,3 +174,6 @@ chkconfig ntpd on
 chkconfig atop on
 
 %end
+g atop on
+
+%end
