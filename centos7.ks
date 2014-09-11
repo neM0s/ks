@@ -57,11 +57,11 @@ part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=/dev/xvdb
 part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvda
 part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=/dev/xvdb
 
-raid /boot --fstype ext3 --device md0 --level=RAID1 raid.boota raid.bootb
-raid pv.01 --fstype xfs --device pv.01 --level=RAID1 raid.roota raid.rootb
+raid /boot --fstype ext3 --device /boot --level=RAID1 raid.boota raid.bootb
+raid pv.01 --device pv.01 --level=RAID1 raid.roota raid.rootb
 
 volgroup vg_root pv.01
-logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --percent=100 --name=lv_root
+logvol / --vgname=vg_root --fstype xfs --size=100 --grow --percent=100 --name=lv_root
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
