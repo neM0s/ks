@@ -50,10 +50,10 @@ eula --agreed
 
 # Setup the disk
 clearpart --all --initlabel
-part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=xvda1
-part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=xvdb1
-part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=xvda2
-part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=xvdb2
+part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=xvda
+part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=xvdb
+part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=xvda
+part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=xvdb
 
 raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
 raid pv.01 --device=md1 --level=RAID1 raid.roota raid.rootb
