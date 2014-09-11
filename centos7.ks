@@ -53,12 +53,12 @@ zerombr
 clearpart --all
 part /boot --fstype=ext3 --size=500 --asprimary --ondisk=xvda
 part / --fstype=xfs --size=6192 --asprimary --ondisk=xvdb
-part raid.testa --asprimary --fstype=raid --size=1 --grow --ondisk=xvda
-part raid.testb --asprimary --fstype=raid --size=1 --grow --ondisk=xvdb
+part raid.testa --asprimary --fstype=raid --size=1 --grow --ondisk=/dev/xvda
+part raid.testb --asprimary --fstype=raid --size=1 --grow --ondisk=/dev/xvdb
 
-#raid pv.01 --device=md0 --level=RAID1 raid.testa raid.testb
-#volgroup vg_test pv.01
-#logvol /mnt --vgname=vg_test --fstype=xfs --size=100 --grow --name=lv_root
+raid pv.01 --device=md0 --level=RAID1 raid.testa raid.testb
+volgroup vg_test pv.01
+logvol /mnt --vgname=vg_test --fstype=xfs --size=100 --grow --name=lv_root
 
 #part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=xvda
 #part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=xvdb
