@@ -50,15 +50,18 @@ eula --agreed
 
 # Setup the disk
 clearpart --all --initlabel
-part raid.boota --asprimary --size=500 --ondrive=xvda
-part raid.bootb --asprimary --size=500 --ondrive=xvdb
-part raid.roota --asprimary --size=1 --grow --ondrive=xvda
-part raid.rootb --asprimary --size=1 --grow --ondrive=xvdb
+part raid.boota --asprimary --fstype=raid --size=500 --ondrive=xvda
+part raid.bootb --asprimary --fstype=raid --size=500 --ondrive=xvdb
+part raid.roota --asprimary --fstype=raid --size=100 --grow --ondrive=xvda
+part raid.rootb --asprimary --fstype=raid --size=100 --grow --ondrive=xvdb
+
 raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
-raid pv.root --device=md1 --size=1 --grow --leve=RAID1 raid.roota raid.rootb
-volgroup vgroot pv.root
-logvol / --vgname=vgroot --fstype=xfs --size=1 --grow --name=lvroot
-bootloader --timeout=5 --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
+raid pv.root --device=md1 --fstype="physical volume (LVM)" --level=RAID1 raid.roota raid.rootb
+
+volgroup vg_root pv.root
+logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --name=lv_root
+
+bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
 # Shutdown when the kickstart is done
 halt
