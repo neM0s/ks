@@ -49,7 +49,8 @@ text
 eula --agreed
 
 # Setup the disk
-clearpart --all --initlabel
+zerombr
+clearpart --all
 part /boot --fstype=ext3 --size=500 --asprimary
 part / --fstype=xfs --size=6192 --asprimary
 part raid.testa --asprimary --fstype=raid --size=1 --grow --ondisk=xvda
