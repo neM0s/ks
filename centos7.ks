@@ -56,11 +56,11 @@ part raid.roota --asprimary --fstype=raid --size=100 --grow --ondrive=xvda
 part raid.rootb --asprimary --fstype=raid --size=100 --grow --ondrive=xvdb
 
 raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
-raid pv.root --device=md1 --fstype="physical volume (LVM)" --level=RAID1 raid.roota raid.rootb
+raid pv.01 --device=md1 --fstype="physical volume (LVM)" --level=RAID1 raid.roota raid.rootb
 
-volgroup vg_root pv.root
+volgroup vg_root pv.01
 logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --name=lv_root
-logvol swap --vgname=vg_root --size 1024 --name=lv_swap
+#logvol swap --vgname=vg_root --size 1024 --name=lv_swap
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
