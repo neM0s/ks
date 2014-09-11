@@ -50,16 +50,25 @@ eula --agreed
 
 # Setup the disk
 clearpart --all --initlabel
-part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=xvda
-part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=xvdb
-part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=xvda
-part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=xvdb
+part /boot --fstype=ext3 --size=500 --asprimary ondisk=xvda
+part / --fstype=xfs --size=6192 --asprimary on disk=xvdb
+part raid.testa --asprimary --fstype=raid --size=1 --grow --ondisk=xvda
+part raid.testb --asprimary --fstype=raid --size=1 --grow --ondisk=xvdb
 
-raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
-raid pv.01 --device=md1 --level=RAID1 raid.roota raid.rootb
+raid pv.01 --device=md0 --level-RAID1 raid.testa raid.testb
+volgroup vg_test pv.01
+logvol /mnt --vgname=vg_test --fstype=xfs --size=100 --grow --name=lv_root
 
-volgroup vg_root pv.01
-logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --percent=100 --name=lv_root
+#part raid.boota --asprimary --fstype="raid" --size=500 --ondisk=xvda
+#part raid.bootb --asprimary --fstype="raid" --size=500 --ondisk=xvdb
+#part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondisk=xvda
+#part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondisk=xvdb
+
+#raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
+#raid pv.01 --device=md1 --level=RAID1 raid.roota raid.rootb
+
+#volgroup vg_root pv.01
+#logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --percent=100 --name=lv_root
 #logvol swap --vgname=vg_root --size 1024 --name=lv_swap
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
