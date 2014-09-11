@@ -166,4 +166,11 @@ echo -n "."
 grub2-mkconfig -o /boot/grub2/grub.cfg >> /root/ks-post.debug.log 2&>1
 echo .
 
+#base changes
+rpm -ivh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-1.noarch.rpm
+yum install ntp git wget man mc zsh atop htop dstat nmon zsh -y
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+chkconfig ntpd on
+chkconfig atop on
+
 %end
