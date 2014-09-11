@@ -34,7 +34,7 @@ timezone --utc Europe/Warsaw
 #rootpw --lock
 # if you want to preset the root password in a public kickstart file, use SHA512crypt e.g.
 #rootpw --iscrypted $6$9dC4m770Q1o$FCOvPxuqc1B22HM21M5WuUfhkiQntzMuAV7MY0qfVcvhwNQ2L86PcnDWfjDd12IFxWtRiTuvO/niB0Q3Xpf2I.
-rootpw --iscrypted $6$mDCERb4C$Bjz7IelxTkSLxLlejOJf988NrhVPCo4CM6wLpDv75.hmo6kfN0.j2HVpvgp.fYPA5WNsItX.1wOTE69BMZnUW
+rootpw --plaintext changeme
 #user --name=centos --password=Asdfqwerty --plaintext --gecos="CentOS User" --shell=/bin/bash --groups=user,wheel
 # if you want to preset the user password in a public kickstart file, use SHA512crypt e.g.
 # user --name=centos --password=$6$9dC4m770Q1o$FCOvPxuqc1B22HM21M5WuUfhkiQntzMuAV7MY0qfVcvhwNQ2L86PcnDWfjDd12IFxWtRiTuvO/niB0Q3Xpf2I. --iscrypted --gecos="CentOS User" --shell=/bin/bash --groups=user,wheel
@@ -50,10 +50,10 @@ eula --agreed
 
 # Setup the disk
 clearpart --all --initlabel
-part raid.boota --asprimary --fstype=raid --size=500 --ondisk=xvda
-part raid.bootb --asprimary --fstype=raid --size=500 --ondisk=xvdb
-part raid.roota --asprimary --fstype=raid --size=100 --grow --ondisk=xvda
-part raid.rootb --asprimary --fstype=raid --size=100 --grow --ondisk=xvdb
+part raid.boota --asprimary --fstype="raid" --size=500 --onpart=xvda1
+part raid.bootb --asprimary --fstype="raid" --size=500 --onpart=xvdb1
+part raid.roota --asprimary --fstype="raid" --size=100 --grow --onpart=xvda2
+part raid.rootb --asprimary --fstype="raid" --size=100 --grow --onpart=xvdb2
 
 raid /boot --fstype=ext3 --device=md0 --level=RAID1 raid.boota raid.bootb
 raid pv.01 --device=md1 --fstype="physical volume (LVM)" --level=RAID1 raid.roota raid.rootb
@@ -65,7 +65,7 @@ logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --percent=100 --name=lv
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
 # Shutdown when the kickstart is done
-halt
+reboot
 
 # Minimal package set
 %packages --excludedocs
