@@ -20,7 +20,7 @@ keyboard pl2
 # Configure networking without IPv6, firewall off
 
 # for STATIC IP: uncomment and configure
- network --onboot=yes --device=eth0 --bootproto=static --ip=192.168.1.39 --netmask=255.255.255.0 --gateway=192.168.1.1 --nameserver=192.168.1.1 --noipv6 --hostname=RamDisk
+ network --onboot=yes --device=eth0 --bootproto=static --ip=192.168.1.39 --netmask=255.255.255.0 --gateway=192.168.1.1 --nameserver=192.168.1.20 --noipv6 --hostname=RamDisk
 
 # for DHCP:
 #network --bootproto=dhcp --device=eth0 --onboot=on
@@ -60,6 +60,7 @@ raid pv.root --device=md1 --fstype="physical volume (LVM)" --level=RAID1 raid.ro
 
 volgroup vg_root pv.root
 logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --name=lv_root
+logvol swap --vgname=vg_root --size 1024 --name=lv_swap
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
