@@ -61,7 +61,6 @@ raid pv.01 --fstype xfs --device pv.01 --level=RAID1 raid.10 raid.11
 volgroup vg_test pv.01
 logvol /home --vgname=vg_test --size=100 --name=lv_test
 
-
 #part raid.boota --asprimary --fstype="raid" --size=500 --ondrive=xvda
 #part raid.bootb --asprimary --fstype="raid" --size=500 --ondrive=xvdb
 #part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondrive=xvda
