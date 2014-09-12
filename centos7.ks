@@ -52,25 +52,25 @@ eula --agreed
 zerombr
 clearpart --all
 
-#part /boot --fstype=ext3 --size=500 --asprimary --ondisk=xvda
-#part / --fstype=xfs --size=6192 --asprimary --ondisk=xvdb
-#part raid.10 --asprimary --fstype=raid --size=1 --grow --ondrive=xvda
-#part raid.11 --asprimary --fstype=raid --size=1 --grow --ondrive=xvdb
+part /boot --fstype=ext3 --size=500 --asprimary --ondisk=xvda
+part / --fstype=xfs --size=6192 --asprimary --ondisk=xvdb
+part raid.10 --asprimary --fstype=raid --size=1 --grow --ondrive=xvda
+part raid.11 --asprimary --fstype=raid --size=1 --grow --ondrive=xvdb
 
-#raid pv.01 --device pv.01 --level=RAID1 raid.10 raid.11
-#volgroup vg_test pv.01
-#logvol /home --fstype=xfs --vgname=vg_test --size=1 --grow --name=lv_test
+raid pv.01 --device pv.01 --level=RAID1 raid.10 raid.11
+volgroup vg_test pv.01
+logvol /home --fstype=xfs --vgname=vg_test --size=1 --grow --name=lv_test
 
-part raid.10 --asprimary --fstype="raid" --size=500 --ondrive=xvda
-part raid.11 --asprimary --fstype="raid" --size=500 --ondrive=xvdb
-part raid.20 --asprimary --fstype="raid" --size=100 --grow --ondrive=xvda
-part raid.21 --asprimary --fstype="raid" --size=100 --grow --ondrive=xvdb
+#part raid.10 --asprimary --fstype="raid" --size=500 --ondrive=xvda
+#part raid.11 --asprimary --fstype="raid" --size=500 --ondrive=xvdb
+#part raid.20 --asprimary --fstype="raid" --size=100 --grow --ondrive=xvda
+#part raid.21 --asprimary --fstype="raid" --size=100 --grow --ondrive=xvdb
 
-raid /boot --fstype=xfs --device boot --level=RAID1 raid.10 raid.11
-raid pv.01 --device pv.01 --level=RAID1 raid.20 raid.21
+#raid /boot --fstype=xfs --device boot --level=RAID1 raid.10 raid.11
+#raid pv.01 --device pv.01 --level=RAID1 raid.20 raid.21
 
-volgroup vg_root pv.01
-logvol / --vgname=vg_root --fstype=xfs --size=1 --grow --name=lv_root
+#volgroup vg_root pv.01
+#logvol / --vgname=vg_root --fstype=xfs --size=1 --grow --name=lv_root
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
