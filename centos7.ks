@@ -20,7 +20,7 @@ keyboard pl2
 # Configure networking without IPv6, firewall off
 
 # for STATIC IP: uncomment and configure
- network --onboot=yes --device=eth0 --bootproto=static --ip=192.168.1.39 --netmask=255.255.255.0 --gateway=192.168.1.1 --nameserver=192.168.1.1 --noipv6 --hostname=RamDisk
+network --onboot=yes --device=eth0 --bootproto=static --ip=192.168.1.38 --netmask=255.255.255.0 --gateway=192.168.1.1 --nameserver=192.168.1.1 --noipv6 --hostname=RamDisk
 
 # for DHCP:
 #network --bootproto=dhcp --device=eth0 --onboot=on
