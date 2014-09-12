@@ -59,7 +59,7 @@ part raid.11 --asprimary --fstype=raid --size=1 --grow --ondrive=xvdb
 
 raid pv.01 --device pv.01 --level=RAID1 raid.10 raid.11
 volgroup vg_test pv.01
-logvol /home --fstype="xfs" --vgname=vg_test --size=1 --grow --name=lv_test --chunksize=64
+logvol /home --fstype="xfs" --vgname=vg_test --size=1 --grow --name=lv_test
 
 #part raid.10 --asprimary --fstype="raid" --size=500 --ondrive=xvda
 #part raid.11 --asprimary --fstype="raid" --size=500 --ondrive=xvdb
