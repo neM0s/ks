@@ -61,16 +61,16 @@ clearpart --all
 #volgroup vg_test pv.01
 #logvol /home --fstype=xfs --vgname=vg_test --size=1 --grow --name=lv_test
 
-part raid.boota --asprimary --fstype="raid" --size=500 --ondrive=xvda
-part raid.bootb --asprimary --fstype="raid" --size=500 --ondrive=xvdb
-part raid.roota --asprimary --fstype="raid" --size=100 --grow --ondrive=xvda
-part raid.rootb --asprimary --fstype="raid" --size=100 --grow --ondrive=xvdb
+part raid.10 --asprimary --fstype="raid" --size=500 --ondrive=xvda
+part raid.11 --asprimary --fstype="raid" --size=500 --ondrive=xvdb
+part raid.20 --asprimary --fstype="raid" --size=100 --grow --ondrive=xvda
+part raid.21 --asprimary --fstype="raid" --size=100 --grow --ondrive=xvdb
 
-raid /boot --fstype ext4 --device boot --level=RAID1 raid.boota raid.bootb
-raid pv.01 --device pv.01 --level=RAID1 raid.roota raid.rootb
+raid /boot --fstype=xfs --device boot --level=RAID1 raid.10 raid.11
+raid pv.01 --device pv.01 --level=RAID1 raid.20 raid.21
 
 volgroup vg_root pv.01
-logvol / --vgname=vg_root --fstype=xfs --size=100 --grow --name=lv_root
+logvol / --vgname=vg_root --fstype=xfs --size=1 --grow --name=lv_root
 
 bootloader --location=mbr --driveorder=xvda,xvdb --append="console=hvc0"
 
