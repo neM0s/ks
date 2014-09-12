@@ -9,9 +9,9 @@ install
 logging --level=warning
 
 # Install from a friendly mirror and add updates
-url --url http://mirror.rackspace.com/CentOS/7.0.1406/os/x86_64/
-repo --name=centos-updates --mirrorlist=http://mirrorlist.centos.org/?release=7.0.1406&arch=x86_64&repo=updates
-#cdrom
+#url --url http://mirror.rackspace.com/CentOS/7.0.1406/os/x86_64/
+#repo --name=centos-updates --mirrorlist=http://mirrorlist.centos.org/?release=7.0.1406&arch=x86_64&repo=updates
+cdrom
 
 # Language and keyboard setup
 lang en_US.UTF-8
@@ -109,16 +109,6 @@ rm -f /etc/udev/rules.d/70*
 ln -s /dev/null /etc/udev/rules.d/80-net-name-slot.rules
 echo -n "."
 
-# simple eth0 config, again not hard-coded to the build hardware
-#cat > /etc/sysconfig/network-scripts/ifcfg-eth0 << EOF
-#DEVICE="eth0"
-#BOOTPROTO="dhcp"
-#ONBOOT="yes"
-#TYPE="Ethernet"
-#PERSISTENT_DHCLIENT="yes"
-#EOF
-#echo -n "."
-
 # generic localhost names
 cat > /etc/hosts << EOF
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
@@ -130,19 +120,6 @@ echo -n "."
 # since NetworkManager is disabled, need to enable normal networking
 chkconfig network on
 echo .
-
-# utility script
-#echo -n "Utility scripts"
-#echo "== Utility scripts ==" >> /root/ks-post.debug.log
-#wget -O /opt/domu-hostname.sh https://github.com/frederickding/xenserver-kickstart/raw/develop/opt/domu-hostname.sh 2>> /root/ks-post.debug.log
-#chmod +x /opt/domu-hostname.sh
-#echo .
-
-# remove unnecessary packages
-#echo -n "Removing unnecessary packages"
-#echo "== Removing unnecessary packages ==" >> /root/ks-post.debug.log
-#yum -C -y remove linux-firmware >> /root/ks-post.debug.log 2&>1
-#echo .
 
 # generalization
 echo -n "Generalizing"
